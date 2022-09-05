@@ -1,5 +1,6 @@
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext('2d');
+const gravity = 0.2;
 
 canvas.width = 1024;
 canvas.height = 576;
@@ -10,11 +11,12 @@ class Sprite{
     constructor({position, velocity}){
         this.position = position;
         this.velocity = velocity;
+        this.height = 150;
     }
 
     draw(){ // draw out sprite
         c.fillStyle = 'red';
-        c.fillRect(this.position.x, this.position.y, 50,150);
+        c.fillRect(this.position.x, this.position.y, 50, this.height);
     }
 
     update(){
