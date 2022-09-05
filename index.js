@@ -23,7 +23,7 @@ class Sprite{
 
     update(){
         this.draw();
-        
+        this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
 
         if(this.position.y + this.height + this.velocity.y >= canvas.height){
@@ -55,3 +55,30 @@ function animate(){
 }
 
 animate();
+
+// arrow function basis for function statement (action) vs function expession (produces value) 
+// https://www.freecodecamp.org/news/when-and-why-you-should-use-es6-arrow-functions-and-when-you-shouldnt-3d851d7f0b26/
+// https://www.w3schools.com/js/js_htmldom_eventlistener.asp
+// When passing parameter values, use an "anonymous function" that calls the specified function with the parameters:
+// element.addEventListener("click", function(){ myFunction(p1, p2); });
+window.addEventListener('keydown', (event) => {
+    switch(event.key){
+        case 'd':
+            player1.velocity.x +=1;
+        break;
+        case 'a':
+            player1.velocity.x -=1;
+        break;
+    }
+});
+
+window.addEventListener('keyup', (event) => {
+    switch(event.key){
+        case 'd':
+            player1.velocity.x =0;
+        break;
+        case 'a':
+            player1.velocity.x =0;
+        break;
+    }
+});
