@@ -4,27 +4,41 @@
     <link rel="stylesheet" href="styles.css">
 	<meta charset="UTF-8" />
 	<title>Arcade style Beat-em-up</title>
+
 </head>
 <body>
-    <div>
-        <h1> This is a demo html5 game!</h1>
-    </div>
 
     <!-- Entire Game Screen -->
-    <div>
+    <div id="game-screen" >
         <!-- Entire Game Bar Section-->
-        <div style="position: relative;">
+        <div id= "game-bar">
             <!-- Game Bare Components -->
-            <div style ="position: absolute;">
+            
                 <!-- Left Side -->
-                <div style="background-color: blue; width: 340px; height: 220px;"></div>
+                <!-- <div style="background-color: blue; width: 100px; height: 220px;"></div> -->
+
+                <div id ="player1" class="health-bar" data-total="1000" data-value="1000">
+                    <div class="bar">
+                          <div class="hit"></div>
+                    </div>
+                </div>
+
                 <!-- Middle timer dimound -->
-                <div style="background-color: green; width: 340px; height: 220px;"></div>
+                <!-- <div style="background-color: green; width: 100px; height: 220px;"></div> -->
+                <div class="container diamond-shape">
+                    <div class="item-count">99</div><!-- .item-count -->
+                </div><!-- .container .diamond-shape-->
+
                 <!-- right side -->
-                <div style="background-color: white; width: 340px; height: 220px;"></div>
-            </div>
+                <!-- <div style="background-color: white; width: 100px; height: 220px;"></div> -->
+                <div id="player2" class="health-bar" data-total="1000" data-value="1000">
+                    <div class="bar">
+                          <div class="hit"></div>
+                    </div>
+                </div>
+            
         </div>
-        <canvas> </canvas>
+        <canvas></canvas>
     </div>
     
 </body>
