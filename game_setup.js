@@ -21,18 +21,21 @@ const action_keys = {
     ArrowUp: { pressed : false}
 };
 // other spites
-const background1 = new Sprite({
+const background = new Sprite({
     position: {x: 0, y:0},
-    imageSRc: "./assets/background_layer_1_1024px.png"
+    imageSrc: "./assets/background.png"
 })
-const background2 = new Sprite({
-    position: {x: 0, y:0},
-    imageSRc: "./assets/background_layer_2_1024px.png"
-})
-const background3 = new Sprite({
-    position: {x: 0, y:0},
-    imageSRc: "./assets/background_layer_3_1024px.png"
-})
+
+const shop = new Sprite({
+    position: {
+        x: 660,
+        y: 128
+    },
+    imageSrc: "./assets/shop_animated.png",
+    scale: 2.75,
+    frames: 6
+});
+
 
 //
 // intial player spawn location

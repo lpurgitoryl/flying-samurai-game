@@ -1,22 +1,45 @@
 // uses global canvas context of c in game_setup.js
 class Sprite{
-    constructor({position, imageSRc}){
+    constructor({position, imageSrc, scale = 1, frames = 1,}){
         this.position = position; // x and y properties
-
+        // gen ratios
         this.width = 50;
         this.height = 150;
 
+        //image setup
         this.image = new Image();
-        this.image.src = imageSRc; // string aka file path
-       
+        this.image.src = imageSrc; // string aka file path
+        this.scale = scale;
+
+        // animation frames
+        this.frames = frames;
+        this.currFrame = 0;
+        this.framesElapsed = 0;
+        this.framesHold = 10;
+
     }
     
     draw(){ 
-        c.drawImage(this.image, this.position.x, this.position.y);
+        c.drawImage(this.image, 
+           this.currFrame * (this.image.width / this.frames), 0, this.image.width / this.frames, this.image.height,
+
+            this.position.x, this.position.y, 
+            (this.image.width / this.frames) * this.scale , this.image.height * this.scale);
     }
 
     update(){
         this.draw();
+
+        this.framesElapsed++;
+        if(this.framesElapsed % this.framesHold === 0){
+            if(this.currFrame < this.frames - 1){
+                this.currFrame++;
+            } else {
+                this.currFrame = 0;
+            }
+        }
+        // frame handler for croping and moving image up to next frame
+        
     }
 }
 

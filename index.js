@@ -73,9 +73,9 @@ function animate(){
     c.fillStyle= 'black'
     window.requestAnimationFrame(animate);
     c.fillRect(0,0, canvas.width, canvas.height);
-    background1.update();
-    background2.update();
-    background3.update();
+    background.update();
+    shop.update();
+
     player1.update();
     player2.update();
 
