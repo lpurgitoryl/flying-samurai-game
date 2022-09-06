@@ -1,6 +1,9 @@
 
 * {
     box-sizing: border-box;
+    /* font-family: "Open Sans", sans-serif; */
+    font-size: 26px;
+    font-weight: 600;
 }
 
 h1 {

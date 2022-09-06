@@ -2,6 +2,8 @@
 <html>
 <head>
     <link rel="stylesheet" href="styles.css">
+    <link href="http://fonts.cdnfonts.com/css/arcade-classic" rel="stylesheet">
+                
 	<meta charset="UTF-8" />
 	<title>Arcade style Beat-em-up</title>
 
@@ -12,11 +14,9 @@
     <div id="game-screen" >
         <!-- Entire Game Bar Section-->
         <div id= "game-bar">
-            <!-- Game Bare Components -->
-            <div background="green" ></div>
-                <!-- Left Side -->
-                <!-- <div style="background-color: blue; width: 100px; height: 220px;"></div> -->
-
+            <!-- Game Bar Components -->
+            
+                <!-- Left Side health-->
                 <div class="health-bar" data-total="1000" data-value="1000">
                     <div id ="player1-bar" class="bar">
                           <div id ="player1-hit" class="hit"></div>
@@ -24,25 +24,36 @@
                 </div>
 
                 <!-- Middle timer dimound -->
-                <!-- <div style="background-color: green; width: 100px; height: 220px;"></div> -->
                 <div class="container diamond-shape">
-                    <div class="item-count">99</div><!-- .item-count -->
-                </div><!-- .container .diamond-shape-->
+                    <div id="timer" class="item-count">60</div>
+                </div>
 
-                <!-- right side -->
-                <!-- <div style="background-color: white; width: 100px; height: 220px;"></div> -->
+                <!-- right side health -->
                 <div  class="health-bar" data-total="1000" data-value="1000">
                     <div id="player2-bar" class="bar">
                           <div id="player2-hit" class="hit"></div>
                     </div>
-                </div>
+                </div> 
             
         </div>
+        <div style="position: absolute;display: grid;height: 50px;grid-template-columns: 50% 50%;width: 100%;">
+
+            <!-- <span style="display:inline; color: red; text-align:center; ">First Span</span>
+            <span style="display:inline; color: blue; text-align: center;">Second Span</span> -->
+            
+                <h2 style="color: rgb(227, 24, 24); text-align: left; margin: 0; padding-left: 50px;;"> Player 1
+                </h2>
+
+                <h2 style="color: rgb(227, 24, 24); text-align: right; margin: 0; padding-right: 50px;"> Player 2</h2> 
+            
+
+        </div>
         <canvas></canvas>
+
     </div>
     <!-- testing health bars -->
     <div class="slidecontainer">
-        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        <input type="range" min="0" max="100" value="100" class="slider" id="myRange">
         <p>Value: <span id="demo"></span></p>
     </div>
 </body>

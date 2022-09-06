@@ -41,7 +41,7 @@ output.innerHTML = slider.value;
 slider.oninput = function() {
   output.innerHTML = this.value;
   document.getElementById("player1-bar").style.width = slider.value + '%';
-  document.getElementById("player1-hit").style.width = (100-slider.value) + '%';
+  document.getElementById("player1-hit").style.width = (100 - slider.value) + '%';
 
 //   document.getElementById("player2-bar").style.width = slider.value + '%';
 //   document.getElementById("player2-hit").style.width = (100-slider.value) + '%';

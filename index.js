@@ -19,6 +19,10 @@ const action_keys = {
     ArrowUp: { pressed : false}
 };
 
+// TODO: max double jump
+// TODO: keep from going past screen
+// TODO: random player names
+// TODO: Controls Screen Before play start
 
 c.fillRect(0,0, canvas.width, canvas.height);
 
@@ -92,7 +96,7 @@ window.addEventListener('keyup', (event) => {
     }
 });
 
-// intial sprite set up ^^
+
 function animate(){
     c.fillStyle= 'black'
     window.requestAnimationFrame(animate);
