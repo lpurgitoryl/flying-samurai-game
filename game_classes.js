@@ -1,18 +1,30 @@
+// uses global canvas context of c in game_setup.js
 class Sprite{
-    constructor({position, velocity}){
-        this.position = position;
-        this.velocity = velocity;
+    constructor({position, imageSRc}){
+        this.position = position; // x and y properties
+
+        this.width = 50;
         this.height = 150;
 
-        this.last_key;// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let
+        this.image = new Image();
+        this.image.src = imageSRc; // string aka file path
+       
+    }
+    
+    draw(){ 
+        c.drawImage(this.image, this.position.x, this.position.y);
     }
 
-
+    update(){
+        this.draw();
+    }
 }
 
 class Player extends Sprite {
     constructor({position, velocity}){
-        super({position, velocity})
+        super({position});
+        this.velocity = velocity;
+        this.last_key;// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let
     }
 
     draw(){ // draw out sprite
@@ -33,7 +45,7 @@ class Player extends Sprite {
     }
 }
 
-//
+// slider functionality
 var slider = document.getElementById("myRange");
 var output = document.getElementById("demo");
 output.innerHTML = slider.value;

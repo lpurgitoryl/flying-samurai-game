@@ -1,41 +1,11 @@
 //  JS refresher semi colons only go after statements not fucntions
-// consts
-const canvas = document.querySelector("canvas");
-const c = canvas.getContext('2d');
-canvas.width = 1024;
-canvas.height = 576;
-
-const gravity = 0.2;
-const horizontal_vel = 7;
-const vertical_vel = 3;
-
-
-const action_keys = {
-    a: { pressed: false},
-    d: { pressed: false},
-    w: { pressed : false},
-    ArrowRight: { pressed : false},
-    ArrowLeft: { pressed : false},
-    ArrowUp: { pressed : false}
-};
 
 // TODO: max double jump
 // TODO: keep from going past screen
 // TODO: random player names
 // TODO: Controls Screen Before play start
 
-c.fillRect(0,0, canvas.width, canvas.height);
-
-
-
-const player1 = new Player(
-    {position: {x:0 , y:0}, velocity:{x:0 , y:0}} 
-);
-
-const player2 = new Player(
-    { position: {x:100 , y:0}, velocity:{x:0 , y:0}}
-);
-
+// Event Listeners for player keypresses
 
 // arrow function basis for function statement (action) vs function expession (produces value) 
 // https://www.freecodecamp.org/news/when-and-why-you-should-use-es6-arrow-functions-and-when-you-shouldnt-3d851d7f0b26/
@@ -95,12 +65,17 @@ window.addEventListener('keyup', (event) => {
 
     }
 });
+// End Event Listeners
 
+// Recursive Animation Function
 
 function animate(){
     c.fillStyle= 'black'
     window.requestAnimationFrame(animate);
     c.fillRect(0,0, canvas.width, canvas.height);
+    background1.update();
+    background2.update();
+    background3.update();
     player1.update();
     player2.update();
 
@@ -113,7 +88,7 @@ function animate(){
     } else if (action_keys.d.pressed &&  player1.last_key == 'd'){
         player1.velocity.x = horizontal_vel;
     }
-    //
+    // player 2 movement
     if(action_keys.ArrowLeft.pressed && player2.last_key == 'ArrowLeft'){
         player2.velocity.x =-horizontal_vel;
     }else if(action_keys.ArrowRight.pressed && player2.last_key == 'ArrowRight'){
@@ -122,4 +97,19 @@ function animate(){
 
 }
 
+
 animate();
+
+// timer
+let timer = 10;
+function decreaseTimer(){
+    if (timer > 0){
+        setTimeout(decreaseTimer, 1000);
+        timer--;
+        console.log(document.getElementById("timer").innerText);
+        document.getElementById("timer").innerText = timer;
+    }
+
+}
+
+decreaseTimer();
