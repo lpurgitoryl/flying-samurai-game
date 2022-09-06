@@ -1,5 +1,33 @@
-<!DOCTYPE html>
-<canvas>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+	<meta charset="UTF-8" />
+	<title>Arcade style Beat-em-up</title>
+</head>
+<body>
+    <div>
+        <h1> This is a demo html5 game!</h1>
+    </div>
 
-</canvas>
+    <!-- Entire Game Screen -->
+    <div>
+        <!-- Entire Game Bar Section-->
+        <div style="position: relative;">
+            <!-- Game Bare Components -->
+            <div style ="position: absolute;">
+                <!-- Left Side -->
+                <div style="background-color: blue; width: 340px; height: 220px;"></div>
+                <!-- Middle timer dimound -->
+                <div style="background-color: green; width: 340px; height: 220px;"></div>
+                <!-- right side -->
+                <div style="background-color: white; width: 340px; height: 220px;"></div>
+            </div>
+        </div>
+        <canvas> </canvas>
+    </div>
+    
+</body>
+<script src="game_classes.js"></script>
 <script src="index.js"></script>
+</html>

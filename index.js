@@ -15,43 +15,19 @@ const action_keys = {
     ArrowLeft: { pressed : false},
     ArrowUp: { pressed : false}
 };
+
 canvas.width = 1024;
 canvas.height = 576;
 
 c.fillRect(0,0, canvas.width, canvas.height);
 
-class Sprite{
-    constructor({position, velocity}){
-        this.position = position;
-        this.velocity = velocity;
-        this.height = 150;
 
-        this.last_key;// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let
-    }
 
-    draw(){ // draw out sprite
-        c.fillStyle = 'red';
-        c.fillRect(this.position.x, this.position.y, 50, this.height);
-    }
-
-    update(){
-        this.draw();
-        this.position.x += this.velocity.x;
-        this.position.y += this.velocity.y;
-
-        if(this.position.y + this.height + this.velocity.y >= canvas.height){
-            this.velocity.y =0;
-        }   else {
-            this.velocity.y += gravity;
-        }
-    }
-}
-
-const player1 = new Sprite(
+const player1 = new Player(
     {position: {x:0 , y:0}, velocity:{x:0 , y:0}} 
 );
 
-const player2 = new Sprite(
+const player2 = new Player(
     { position: {x:100 , y:0}, velocity:{x:0 , y:0}}
 );
 
