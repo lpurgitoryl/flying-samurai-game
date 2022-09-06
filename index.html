@@ -13,13 +13,13 @@
         <!-- Entire Game Bar Section-->
         <div id= "game-bar">
             <!-- Game Bare Components -->
-            
+            <div background="green" ></div>
                 <!-- Left Side -->
                 <!-- <div style="background-color: blue; width: 100px; height: 220px;"></div> -->
 
-                <div id ="player1" class="health-bar" data-total="1000" data-value="1000">
-                    <div class="bar">
-                          <div class="hit"></div>
+                <div class="health-bar" data-total="1000" data-value="1000">
+                    <div id ="player1-bar" class="bar">
+                          <div id ="player1-hit" class="hit"></div>
                     </div>
                 </div>
 
@@ -31,16 +31,20 @@
 
                 <!-- right side -->
                 <!-- <div style="background-color: white; width: 100px; height: 220px;"></div> -->
-                <div id="player2" class="health-bar" data-total="1000" data-value="1000">
-                    <div class="bar">
-                          <div class="hit"></div>
+                <div  class="health-bar" data-total="1000" data-value="1000">
+                    <div id="player2-bar" class="bar">
+                          <div id="player2-hit" class="hit"></div>
                     </div>
                 </div>
             
         </div>
         <canvas></canvas>
     </div>
-    
+    <!-- testing health bars -->
+    <div class="slidecontainer">
+        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        <p>Value: <span id="demo"></span></p>
+    </div>
 </body>
 <script src="game_classes.js"></script>
 <script src="index.js"></script>

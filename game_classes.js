@@ -14,7 +14,7 @@ class Player extends Sprite {
     constructor({position, velocity}){
         super({position, velocity})
     }
-    
+
     draw(){ // draw out sprite
         c.fillStyle = 'red';
         c.fillRect(this.position.x, this.position.y, 50, this.height);
@@ -31,4 +31,18 @@ class Player extends Sprite {
             this.velocity.y += gravity;
         }
     }
+}
+
+//
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+  document.getElementById("player1-bar").style.width = slider.value + '%';
+  document.getElementById("player1-hit").style.width = (100-slider.value) + '%';
+
+//   document.getElementById("player2-bar").style.width = slider.value + '%';
+//   document.getElementById("player2-hit").style.width = (100-slider.value) + '%';
 }
