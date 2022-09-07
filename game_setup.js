@@ -43,7 +43,7 @@ const shop = new Sprite({
 // intial player spawn location
 const player1 = new Player(
     { position: {x:100 , y:0}, velocity:{x:0 , y:0},
-    imageOffSet: { x: 215,y: 217},
+    imageOffSet: { x: 215,y: 157},
     imageSrc: './assets/Idle.png',
     frames: 8,
     scale: 2.5
@@ -54,7 +54,7 @@ const player1 = new Player(
 
 const player2 = new Player(
     { position: {x:100 , y:0}, velocity:{x:0 , y:0},
-      imageOffSet: { x: 215,y: 217},
+      imageOffSet: { x: 215,y: 157},
       imageSrc: './assets/Idle.png',
       frames: 8,
       scale: 2.5

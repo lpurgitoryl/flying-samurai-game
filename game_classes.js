@@ -74,8 +74,8 @@ class Player extends Sprite {
     // this is for rectangle collision
     draw(){ // draw out sprite
         
-        c.fillStyle = 'red';
-        c.fillRect(this.position.x, this.position.y, this.width, this.height);
+        // c.fillStyle = 'red';
+        // c.fillRect(this.position.x, this.position.y, this.width, this.height);
 
         this.attackBox.position.x = this.position.x ;
         this.attackBox.position.y =  this.position.y + (50); // additon  moves down
