@@ -27,7 +27,9 @@ window.addEventListener('keydown', (event) => {
             //player1_last_key = 'w';
             player1.velocity.y = -vertical_vel; // negative to go up
         break;
-
+        case ' ':
+            player1.attack();
+        break;
         //
         case 'ArrowRight':
             action_keys.ArrowRight.pressed = true;
@@ -39,6 +41,9 @@ window.addEventListener('keydown', (event) => {
         break;
         case 'ArrowUp':
             player2.velocity.y = -vertical_vel;
+        break;
+        case 'ArrowDown':
+            player2.attack();
         break;
 
             
@@ -95,10 +100,34 @@ function animate(){
         player2.velocity.x =horizontal_vel;
     }
 
+    if(player1.isAttacking && attackBoxCollision(player1, player2)){
+        console.log("player 1 attack landed");
+        player1.isAttacking = false;
+    } else if (player2.isAttacking && attackBoxCollision(player2, player1)){
+        console.log("player 2 attack landed");
+        player2.isAttacking = false;
+    }
+
 }
 
 
 animate();
+// functions
+
+
+function attackBoxCollision( Player1_attack, Player2_attack){
+    var attacked = false;
+    if(
+        Player1_attack.attackBox.position.x + Player1_attack.attackBox.width >= Player2_attack.position.x 
+        && Player1_attack.attackBox.position.x <= Player2_attack.position.x + Player2_attack.width
+        && Player1_attack.attackBox.position.y + Player1_attack.attackBox.height >= Player2_attack.position.y 
+        && Player1_attack.attackBox.position.y <= Player2_attack.position.y + Player2_attack.height
+        ) {
+            attacked = true;
+        }
+        
+        return attacked;
+}
 
 // timer
 let timer = 10;
