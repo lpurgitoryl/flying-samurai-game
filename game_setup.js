@@ -53,11 +53,11 @@ const player1 = new Player(
 );
 
 const player2 = new Player(
-    { position: {x:200 , y:0}, velocity:{x:0 , y:0},
+    { position: {x:100 , y:0}, velocity:{x:0 , y:0},
       imageOffSet: { x: 215,y: 217},
-      imageSrc: './assets/background_layer_1_1024px.png',
+      imageSrc: './assets/Idle.png',
       frames: 8,
-      scale: 1
+      scale: 2.5
       , color: 'green' // temp
       
     }

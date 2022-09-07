@@ -84,7 +84,7 @@ class Player extends Sprite {
         // attack box
 
         if(this.last_key === 'a'  || this.last_key === 'ArrowLeft'  ){
-            this.attackBox.position.x =  this.position.x - this.width; // subtraction moves left
+            this.attackBox.position.x =  this.position.x - this.attackBox.width + this.width; // subtraction moves left
             console.log("FLIPPING");
         }
 
@@ -96,8 +96,9 @@ class Player extends Sprite {
     }
 
     update(){
+        super.draw()
         this.draw();
-        //super.update();
+        super.update();
 
 
         // this.flipAttackBox();
