@@ -46,7 +46,7 @@ class Sprite{
 }
 
 class Player extends Sprite {
-    constructor({position, velocity , imageSrc, scale = 1, frames = 1, imageOffSet = { x: 0, y: 0}, color }){
+    constructor({position, velocity , imageSrc, scale = 1, frames = 1, imageOffSet = { x: 0, y: 0}, color , sprites}){
         super({position, imageSrc, scale, frames, imageOffSet });
         // rectangle collison vars
         this.width = 50;
@@ -69,6 +69,14 @@ class Player extends Sprite {
         }
         this.isAttacking = false;
 
+        this.sprites = sprites;
+
+        for (const sprite in this.sprites){
+            sprites[sprite].image = new Image();
+            sprites[sprite].image.src =  sprites[sprite].imageSrc;
+        }
+       
+
     }
 
     // this is for rectangle collision
@@ -77,11 +85,17 @@ class Player extends Sprite {
         // c.fillStyle = 'red';
         // c.fillRect(this.position.x, this.position.y, this.width, this.height);
 
+
+    }
+
+    update(){
+        super.draw()
+        // attack box
         this.attackBox.position.x = this.position.x ;
         this.attackBox.position.y =  this.position.y + (50); // additon  moves down
 
         if(this.isAttacking){
-        // attack box
+
 
         if(this.last_key === 'a'  || this.last_key === 'ArrowLeft'  ){
             this.attackBox.position.x =  this.position.x - this.attackBox.width + this.width; // subtraction moves left
@@ -93,15 +107,9 @@ class Player extends Sprite {
         c.fillStyle = this.color;
         c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
         }
-    }
-
-    update(){
-        super.draw()
-        this.draw();
+        //
         super.update();
 
-
-        // this.flipAttackBox();
 
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
@@ -118,7 +126,40 @@ class Player extends Sprite {
         setTimeout(() => {this.isAttacking = false;}, 100 )
 
     }
-    // player one/two box starts right 
+    
+    switchSprites(sprite){
+        switch (sprite) {
+            case 'idle':
+              if (this.image !== this.sprites.idle.image) {
+                this.image = this.sprites.idle.image
+                this.frames = this.sprites.idle.frames
+                this.currFrame = 0
+              }
+            break
+            case 'run_left':
+              if (this.image !== this.sprites.run_left.image) {
+                this.image = this.sprites.run_left.image
+                this.frames = this.sprites.run_left.frames
+                this.currFrame = 0
+              }
+            break
+            case 'run_right':
+                if (this.image !== this.sprites.run_right.image) {
+                  this.image = this.sprites.run_right.image
+                  this.frames = this.sprites.run_right.frames
+                  this.currFrame = 0
+                } 
+            break
+            case 'jump':
+              if (this.image !== this.sprites.jump.image) {
+                this.image = this.sprites.jump.image
+                this.frames = this.sprites.jump.frames
+                this.currFrame = 0
+              } 
+            break
+        }
+      
+    }
 
 }
 

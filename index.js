@@ -87,12 +87,26 @@ function animate(){
     player1.velocity.x = 0;
     player2.velocity.x = 0;
 
+
+
     // player 1 movement
     if(action_keys.a.pressed && player1.last_key == 'a'){
         player1.velocity.x =-horizontal_vel;
+        player1.switchSprites('run_left');
+        
+
     } else if (action_keys.d.pressed &&  player1.last_key == 'd'){
         player1.velocity.x = horizontal_vel;
+        player1.image = player1.sprites.run_left.image;
+        player1.switchSprites('run_right');
+    } else {
+        player1.switchSprites('idle');
     }
+
+    if(player1.velocity.y < 0){
+        player1.switchSprites('jump');
+    }
+
     // player 2 movement
     if(action_keys.ArrowLeft.pressed && player2.last_key == 'ArrowLeft'){
         player2.velocity.x =-horizontal_vel;
@@ -100,6 +114,7 @@ function animate(){
         player2.velocity.x =horizontal_vel;
     }
 
+    // attack logging
     if(player1.isAttacking && attackBoxCollision(player1, player2)){
         console.log("player 1 attack landed");
         player1.isAttacking = false;

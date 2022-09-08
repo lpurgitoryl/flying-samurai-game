@@ -48,12 +48,35 @@ const player1 = new Player(
     frames: 8,
     scale: 2.5
     , color: 'blue' // tempsd
+    ,sprites: {
+        idle: {
+            imageSrc: './assets/Idle.png',
+            frames: 8,
+
+        },
+        run_left: {
+            imageSrc: './assets/Run-left.png',
+            frames: 8
+        },
+        run_right: {
+            imageSrc: './assets/Run.png',
+            frames: 8
+        },
+        jump: {
+            imageSrc: './assets/Jump.png',
+            frames: 2
+        },
+        fall: {
+            imageSrc: './assets/Fall.png',
+            frames: 2
+        }
+    }
 
   }
 );
 
 const player2 = new Player(
-    { position: {x:100 , y:0}, velocity:{x:0 , y:0},
+    { position: {x:300 , y:0}, velocity:{x:0 , y:0},
       imageOffSet: { x: 215,y: 157},
       imageSrc: './assets/Idle.png',
       frames: 8,
