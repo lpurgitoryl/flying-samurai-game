@@ -103,10 +103,12 @@ function animate(){
         player1.switchSprites('idle');
     }
 
+    // jumping
     if(player1.velocity.y < 0){
         player1.switchSprites('jump');
+    } else if (player1.velocity.y > 0){
+        player1.switchSprites('fall');
     }
-
     // player 2 movement
     if(action_keys.ArrowLeft.pressed && player2.last_key == 'ArrowLeft'){
         player2.velocity.x =-horizontal_vel;

@@ -114,12 +114,15 @@ class Player extends Sprite {
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
 
+        // gravity function
         if(this.position.y + this.height + this.velocity.y >= canvas.height - 90){
             this.velocity.y =0;
+            this.position.y = 336;
         }   else {
             this.velocity.y += gravity;
         }
-    }
+        // console.log(this.position.y);
+    }   
 
     attack(){
         this.isAttacking = true;
@@ -156,6 +159,13 @@ class Player extends Sprite {
                 this.frames = this.sprites.jump.frames
                 this.currFrame = 0
               } 
+            break
+            case 'fall':
+                if (this.image !== this.sprites.fall.image) {
+                    this.image = this.sprites.fall.image
+                    this.frames = this.sprites.fall.frames
+                    this.currFrame = 0
+                  } 
             break
         }
       
