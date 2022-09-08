@@ -108,6 +108,7 @@ class Player extends Sprite {
         c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
         }
         //
+        
         super.update();
 
 
@@ -125,12 +126,17 @@ class Player extends Sprite {
     }   
 
     attack(){
+        this.switchSprites('attack1');
         this.isAttacking = true;
         setTimeout(() => {this.isAttacking = false;}, 100 )
 
     }
     
     switchSprites(sprite){
+
+    if (this.image === this.sprites.attack1.image &&
+        this.currFrame < this.sprites.attack1.frames - 1
+        ) return
         switch (sprite) {
             case 'idle':
               if (this.image !== this.sprites.idle.image) {
@@ -164,6 +170,13 @@ class Player extends Sprite {
                 if (this.image !== this.sprites.fall.image) {
                     this.image = this.sprites.fall.image
                     this.frames = this.sprites.fall.frames
+                    this.currFrame = 0
+                  } 
+            break
+            case 'attack1':
+                if (this.image !== this.sprites.attack1.image) {
+                    this.image = this.sprites.attack1.image
+                    this.frames = this.sprites.attack1.frames
                     this.currFrame = 0
                   } 
             break

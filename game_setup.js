@@ -69,6 +69,10 @@ const player1 = new Player(
         fall: {
             imageSrc: './assets/Fall.png',
             frames: 2
+        },
+        attack1: {
+            imageSrc: './assets/Attack1.png',
+            frames: 6
         }
     }
 

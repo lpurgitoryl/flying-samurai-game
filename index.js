@@ -23,8 +23,6 @@ window.addEventListener('keydown', (event) => {
             player1.last_key = 'a';
         break;
         case 'w': 
-           // action_keys.w.pressed = true;
-            //player1_last_key = 'w';
             player1.velocity.y = -vertical_vel; // negative to go up
         break;
         case ' ':
@@ -90,14 +88,13 @@ function animate(){
 
 
     // player 1 movement
-    if(action_keys.a.pressed && player1.last_key == 'a'){
+    if(action_keys.a.pressed && player1.last_key === 'a'){
         player1.velocity.x =-horizontal_vel;
         player1.switchSprites('run_left');
         
 
-    } else if (action_keys.d.pressed &&  player1.last_key == 'd'){
+    } else if (action_keys.d.pressed &&  player1.last_key === 'd'){
         player1.velocity.x = horizontal_vel;
-        player1.image = player1.sprites.run_left.image;
         player1.switchSprites('run_right');
     } else {
         player1.switchSprites('idle');
@@ -109,6 +106,7 @@ function animate(){
     } else if (player1.velocity.y > 0){
         player1.switchSprites('fall');
     }
+
     // player 2 movement
     if(action_keys.ArrowLeft.pressed && player2.last_key == 'ArrowLeft'){
         player2.velocity.x =-horizontal_vel;
