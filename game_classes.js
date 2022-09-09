@@ -28,6 +28,7 @@ class Sprite{
 
         // c.image.style.border = '10px solid blue';
     }
+    
 
     update(){
         this.draw();
@@ -69,6 +70,8 @@ class Player extends Sprite {
         this.isAttacking = false;
         this.isFacingLeft = false;
 
+        this.isDead = false;
+
         this.sprites = sprites;
 
         for (const sprite in this.sprites){
@@ -99,7 +102,9 @@ class Player extends Sprite {
        // }
         //
         super.draw()
-        super.update();
+        if(!this.isDead) 
+            super.update();
+
 
 
         this.position.x += this.velocity.x;
@@ -131,6 +136,13 @@ class Player extends Sprite {
     
     switchSprites(sprite){
 
+    if(this.image === this.sprites.death.image ){
+
+        if (this.currFrame === this.sprites.death.frames -1)
+            this.isDead = true;
+        
+            return;
+    } 
 
     if( this.image === this.sprites.hit.image &&
          this.currFrame < this.sprites.hit.frames - 1) return;

@@ -148,3 +148,35 @@ const player2 = new Player(
     }
 );
 // End Game Setup
+
+// Gamer Helper Functions
+// Match Timer 
+let timer = 60;
+function decreaseTimer(){
+if (timer > 0){
+    setTimeout(decreaseTimer, 1000);
+    timer--;
+    document.getElementById("timer").innerText = timer;
+}
+
+}
+
+function gameOver(){
+    // game over clauses
+    if(player1_healthbar <= 0 && player2_healthbar <= 0){
+        player1.switchSprites('death');
+        player2.switchSprites('death');
+        
+        document.getElementById("match-info").innerHTML = '!!!!!!!!!!!!!! T I E !!!!!!!!!!!!!!!';
+    } else if (player1_healthbar <= 0){
+        player1.switchSprites('death');
+
+        document.getElementById("match-info").innerHTML = '!!!!!!!!!!!!!! PLAYER 2 WINS !!!!!!!!!!!!!!!';
+    } else if (player2_healthbar <= 0){
+        player2.switchSprites('death');
+        document.getElementById("match-info").innerHTML = '!!!!!!!!!!!!!! PLAYER 1 WINS !!!!!!!!!!!!!!!';
+    }
+    if (timer === 0){
+        document.getElementById("match-info").innerHTML = 'TIME RAN OUT';
+    }
+}

@@ -13,38 +13,44 @@
 // When passing parameter values, use an "anonymous function" that calls the specified function with the parameters:
 // element.addEventListener("click", function(){ myFunction(p1, p2); });
 window.addEventListener('keydown', (event) => {
-    switch(event.key){
-        case 'd':
-           action_keys.d.pressed = true;
-           player1.last_key ='d';
-        break;
-        case 'a':
-            action_keys.a.pressed = true;
-            player1.last_key = 'a';
-        break;
-        case 'w': 
-            player1.velocity.y = -vertical_vel; // negative to go up
-        break;
-        case ' ':
-            player1.attack();
-        break;
-        //
-        case 'ArrowRight':
-            action_keys.ArrowRight.pressed = true;
-            player2.last_key = 'ArrowRight';
-        break;
-        case 'ArrowLeft':
-            action_keys.ArrowLeft.pressed = true;
-            player2.last_key = 'ArrowLeft';
-        break;
-        case 'ArrowUp':
-            player2.velocity.y = -vertical_vel;
-        break;
-        case 'ArrowDown':
-            player2.attack();
-        break;
+    if(!player1.isDead){
+        switch(event.key){
+            case 'd':
+            action_keys.d.pressed = true;
+            player1.last_key ='d';
+            break;
+            case 'a':
+                action_keys.a.pressed = true;
+                player1.last_key = 'a';
+            break;
+            case 'w': 
+                player1.velocity.y = -vertical_vel; // negative to go up
+            break;
+            case ' ':
+                player1.attack();
+            break;
+        }
+    }
+    
+    if(!player2.isDead){
+        switch(event.key){
+            case 'ArrowRight':
+                action_keys.ArrowRight.pressed = true;
+                player2.last_key = 'ArrowRight';
+            break;
+            case 'ArrowLeft':
+                action_keys.ArrowLeft.pressed = true;
+                player2.last_key = 'ArrowLeft';
+            break;
+            case 'ArrowUp':
+                player2.velocity.y = -vertical_vel;
+            break;
+            case 'ArrowDown':
+                player2.attack();
+            break;
 
             
+        }
     }
     console.log(event.key);
 });
@@ -78,6 +84,7 @@ function animate(){
     c.fillRect(0,0, canvas.width, canvas.height);
     background.update();
     shop.update();
+
 
     player1.update();
     player2.update();
@@ -146,7 +153,6 @@ function animate(){
         player1_healthbar -= 10;
         player1_hitbar = 100 - player1_healthbar;
 
-       // setTimeout(() => {}, 2200);
         player1.switchSprites('hit');
 
         document.getElementById("player1-bar").style.width = player1_healthbar + '%';
@@ -160,10 +166,13 @@ function animate(){
         player2.isAttacking = false;
     }
 
+    gameOver();
+
 }
 
 
 animate();
+decreaseTimer();
 // functions
 
 
@@ -181,18 +190,8 @@ function attackBoxCollision( Player1_attack, Player2_attack){
         return attacked;
 }
 
-// Match Timer 
-let timer = 60;
-function decreaseTimer(){
-    if (timer > 0){
-        setTimeout(decreaseTimer, 1000);
-        timer--;
-        document.getElementById("timer").innerText = timer;
-    }
 
-}
 
-decreaseTimer();
 
 // slider functionality used for testing health bars
 // var slider = document.getElementById("myRange");
