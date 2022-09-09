@@ -2,14 +2,26 @@
 <html>
 <head>
     <link rel="stylesheet" href="styles.css">
-    <link href="http://fonts.cdnfonts.com/css/arcade-classic" rel="stylesheet">
-                
+    <!-- <link href="http://fonts.cdnfonts.com/css/arcade-classic" rel="stylesheet"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">           
 	<meta charset="UTF-8" />
 	<title>Arcade style Beat-em-up</title>
-
+    
 </head>
-<body>
+<body style="position: absolute ; display: flex; background-color: bisque;">
+    <div>
+            <h1 style="text-align: center;">FLYING SAMURAI</h1>
+            <div style="display: flex;"><img src="icon.png"><img src="icon2.png"></div>
+            <p></p>
+            <p style="font-size: 15px;"> <br> <br> <u>CONTROLS</u> <br><br> Player 1<br> A/D: Left/Right <br> w: jump <br> Space: Attack
+                <br><br> Player 2<br> Arrow Keys: <br>Left/Right <br> Arrow Up: <br> jump <br> Arrow Down: <br> Attack
+             </p>
+    </div>
 
+        
+    
     <!-- Entire Game Screen -->
     <div id="game-screen" >
         <!-- Entire Game Bar Section-->
@@ -25,7 +37,7 @@
 
                 <!-- Middle timer dimound -->
                 <div class="container diamond-shape">
-                    <div id="timer" class="item-count">60</div>
+                    <div id="timer" class="item-count">30</div>
                 </div>
 
                 <!-- right side health -->
@@ -59,7 +71,7 @@
      -->
 </body>
 
-<script src="game_classes.js"></script>
-<script src="game_setup.js"></script>
-<script src="index.js"></script>
+<script src="./js/game_classes.js"></script>
+<script src="./js/game_setup.js"></script>
+<script src="./js/index.js"></script>
 </html>
