@@ -11,6 +11,12 @@ const gravity = 0.2; // pull on objects after jumping
 const horizontal_vel = 7; // aka speed left/right
 const vertical_vel = 5; // jumping 
 
+player1_healthbar = 100;
+player2_healthbar = 100;
+
+player1_hitbar = 100;
+player2_hitbar = 100;
+
 // Key Flags 
 const action_keys = {
     a: { pressed: false},
@@ -77,7 +83,16 @@ const player1 = new Player(
         attack1_left: {
             imageSrc: './assets/player1/Attack1_left.png',
             frames: 6
+        },
+        hit: {
+            imageSrc: './assets/player1/Take hit.png',
+            frames: 4
+        },
+        death: {
+            imageSrc: './assets/player1/Death.png',
+            frames: 6
         }
+      
     }
 
   }
@@ -119,6 +134,14 @@ const player2 = new Player(
         attack1_left: {
             imageSrc: './assets/player2/Attack1_left.png',
             frames: 4
+        },
+        hit: {
+            imageSrc: './assets/player2/Take hit.png',
+            frames: 3
+        },
+        death: {
+            imageSrc: './assets/player2/Death.png',
+            frames: 7
         }
       
     }

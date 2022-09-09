@@ -79,40 +79,24 @@ class Player extends Sprite {
 
     }
 
-    // // this is for rectangle collision
-    // draw(){ // draw out sprite
-        
-    //     // c.fillStyle = 'red';
-    //     // c.fillRect(this.position.x, this.position.y, this.width, this.height);
-
-
-    // }
-    update_left(){
-        //super.update();
-        
-        // frame handler for croping and moving image up to next frame
-        
-    }
 
     update(){
         
         // attack box
-        this.attackBox.position.x = this.position.x ;
+        this.attackBox.position.x = this.position.x + 100 ;
         this.attackBox.position.y =  this.position.y + (50); // additon  moves down
 
-        if(this.isAttacking){
+    //    if(this.isAttacking){
 
             if(this.last_key === 'a'  || this.last_key === 'ArrowLeft'  ){
-                this.attackBox.position.x =  this.position.x - this.attackBox.width + this.width; // subtraction moves left
+                this.attackBox.position.x =  this.position.x - this.attackBox.width + this.width - 100; // subtraction moves left
                 console.log("FLIPPING");
                 this.isFacingLeft = true;
             } 
 
-            console.log( 'last key! =>' + this.last_key);
-
             c.fillStyle = this.color;
             c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
-        }
+       // }
         //
         super.draw()
         super.update();
@@ -128,7 +112,7 @@ class Player extends Sprite {
         }   else {
             this.velocity.y += gravity;
         }
-        // console.log(this.position.y);
+
     }   
 
     attack(){
@@ -141,7 +125,7 @@ class Player extends Sprite {
             this.switchSprites('attack1_left');
         } else this.switchSprites('attack1');
         this.isAttacking = true;
-        setTimeout(() => {this.isAttacking = false;}, 100 )
+        // setTimeout(() => {this.isAttacking = false;}, 100 )
 
     }
     
@@ -212,16 +196,3 @@ class Player extends Sprite {
 
 }
 
-// slider functionality
-var slider = document.getElementById("myRange");
-var output = document.getElementById("demo");
-output.innerHTML = slider.value;
-
-slider.oninput = function() {
-  output.innerHTML = this.value;
-  document.getElementById("player1-bar").style.width = slider.value + '%';
-  document.getElementById("player1-hit").style.width = (100 - slider.value) + '%';
-
-//   document.getElementById("player2-bar").style.width = slider.value + '%';
-//   document.getElementById("player2-hit").style.width = (100-slider.value) + '%';
-}
