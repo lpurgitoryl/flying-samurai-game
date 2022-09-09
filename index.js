@@ -126,10 +126,14 @@ function animate(){
     }
 
     // attack logging and health bar 
-    if(player1.isAttacking && attackBoxCollision(player1, player2)){
+    if(player1.isAttacking && attackBoxCollision(player1, player2) && player1.currFrame>=3){
         console.log("player 1 attack landed");
         player2_healthbar -= 20;
         player2_hitbar = 100 - player2_healthbar;
+
+        player2.switchSprites('hit');
+
+        
 
         document.getElementById("player2-bar").style.width = player2_healthbar + '%';
         document.getElementById("player2-hit").style.width = player2_hitbar + '%';
@@ -137,19 +141,22 @@ function animate(){
 
         player1.isAttacking = false;
 
-    } else if (player2.isAttacking && attackBoxCollision(player2, player1)){
+    } else if (player2.isAttacking && attackBoxCollision(player2, player1)  && player2.currFrame>=2){
         console.log("player 2 attack landed");
         player1_healthbar -= 10;
         player1_hitbar = 100 - player1_healthbar;
+
+       // setTimeout(() => {}, 2200);
+        player1.switchSprites('hit');
 
         document.getElementById("player1-bar").style.width = player1_healthbar + '%';
         document.getElementById("player1-hit").style.width = player1_hitbar + '%';
         document.getElementById("player1-points").innerHTML = player1_healthbar * 10;
 
         player2.isAttacking = false;
-    } else if ( player1.isAttacking && !attackBoxCollision(player1, player2) && player1.currFrame>=4){
+    } else if ( player1.isAttacking && !attackBoxCollision(player1, player2) && player1.currFrame>=3){
         player1.isAttacking = false;
-    } else if (player2.isAttacking && !attackBoxCollision(player2, player1) && player2.currFrame>=3){
+    } else if (player2.isAttacking && !attackBoxCollision(player2, player1) && player2.currFrame>=2){
         player2.isAttacking = false;
     }
 

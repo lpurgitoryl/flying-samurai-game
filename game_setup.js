@@ -85,7 +85,7 @@ const player1 = new Player(
             frames: 6
         },
         hit: {
-            imageSrc: './assets/player1/Take hit.png',
+            imageSrc: './assets/player1/Take Hit.png',
             frames: 4
         },
         death: {

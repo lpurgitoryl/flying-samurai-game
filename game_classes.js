@@ -131,13 +131,16 @@ class Player extends Sprite {
     
     switchSprites(sprite){
 
-    // finsih attack frames first
+
+    if( this.image === this.sprites.hit.image &&
+         this.currFrame < this.sprites.hit.frames - 1) return;
+
     if (
     (this.image === this.sprites.attack1.image &&
-        this.currFrame < this.sprites.attack1.frames - 1) ) return
+        this.currFrame < this.sprites.attack1.frames - 1) ) return;
 
     if (this.image === this.sprites.attack1_left.image &&
-        this.currFrame < this.sprites.attack1_left.frames - 1 ) return
+        this.currFrame < this.sprites.attack1_left.frames - 1 ) return;
 
     
         switch (sprite) {
@@ -187,6 +190,20 @@ class Player extends Sprite {
                 if (this.image !== this.sprites.attack1_left.image) {
                     this.image = this.sprites.attack1_left.image
                     this.frames = this.sprites.attack1_left.frames
+                    this.currFrame = 0
+                  } 
+            break
+            case 'hit':
+                if (this.image !== this.sprites.hit.image) {
+                    this.image = this.sprites.hit.image
+                    this.frames = this.sprites.hit.frames
+                    this.currFrame = 0
+                  } 
+            break
+            case 'death':
+                if (this.image !== this.sprites.death.image) {
+                    this.image = this.sprites.death.image
+                    this.frames = this.sprites.death.frames
                     this.currFrame = 0
                   } 
             break
