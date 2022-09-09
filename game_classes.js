@@ -31,15 +31,14 @@ class Sprite{
 
     update(){
         this.draw();
-
         this.framesElapsed++;
-        if(this.framesElapsed % this.framesHold === 0){
-            if(this.currFrame < this.frames - 1){
-                this.currFrame++;
-            } else {
-                this.currFrame = 0;
+            if(this.framesElapsed % this.framesHold === 0){
+                if(this.currFrame < this.frames - 1){
+                    this.currFrame++;
+                } else {
+                    this.currFrame = 0;
+                }
             }
-        }
         // frame handler for croping and moving image up to next frame
         
     }
@@ -68,6 +67,7 @@ class Player extends Sprite {
             height: 50,
         }
         this.isAttacking = false;
+        this.isFacingLeft = false;
 
         this.sprites = sprites;
 
@@ -79,36 +79,42 @@ class Player extends Sprite {
 
     }
 
-    // this is for rectangle collision
-    draw(){ // draw out sprite
+    // // this is for rectangle collision
+    // draw(){ // draw out sprite
         
-        // c.fillStyle = 'red';
-        // c.fillRect(this.position.x, this.position.y, this.width, this.height);
+    //     // c.fillStyle = 'red';
+    //     // c.fillRect(this.position.x, this.position.y, this.width, this.height);
 
 
+    // }
+    update_left(){
+        //super.update();
+        
+        // frame handler for croping and moving image up to next frame
+        
     }
 
     update(){
-        super.draw()
+        
         // attack box
         this.attackBox.position.x = this.position.x ;
         this.attackBox.position.y =  this.position.y + (50); // additon  moves down
 
         if(this.isAttacking){
 
+            if(this.last_key === 'a'  || this.last_key === 'ArrowLeft'  ){
+                this.attackBox.position.x =  this.position.x - this.attackBox.width + this.width; // subtraction moves left
+                console.log("FLIPPING");
+                this.isFacingLeft = true;
+            } 
 
-        if(this.last_key === 'a'  || this.last_key === 'ArrowLeft'  ){
-            this.attackBox.position.x =  this.position.x - this.attackBox.width + this.width; // subtraction moves left
-            console.log("FLIPPING");
-        }
+            console.log( 'last key! =>' + this.last_key);
 
-        console.log( 'last key! =>' + this.last_key);
-
-        c.fillStyle = this.color;
-        c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
+            c.fillStyle = this.color;
+            c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
         }
         //
-        
+        super.draw()
         super.update();
 
 
@@ -126,7 +132,14 @@ class Player extends Sprite {
     }   
 
     attack(){
-        this.switchSprites('attack1');
+
+        if(this.last_key === 'a'  || this.last_key === 'ArrowLeft'  ){
+            this.isFacingLeft = true;
+        } else { this.isFacingLeft = false; }
+
+        if (this.isFacingLeft){
+            this.switchSprites('attack1_left');
+        } else this.switchSprites('attack1');
         this.isAttacking = true;
         setTimeout(() => {this.isAttacking = false;}, 100 )
 
@@ -134,9 +147,15 @@ class Player extends Sprite {
     
     switchSprites(sprite){
 
-    if (this.image === this.sprites.attack1.image &&
-        this.currFrame < this.sprites.attack1.frames - 1
-        ) return
+    // finsih attack frames first
+    if (
+    (this.image === this.sprites.attack1.image &&
+        this.currFrame < this.sprites.attack1.frames - 1) ) return
+
+    if (this.image === this.sprites.attack1_left.image &&
+        this.currFrame < this.sprites.attack1_left.frames - 1 ) return
+
+    
         switch (sprite) {
             case 'idle':
               if (this.image !== this.sprites.idle.image) {
@@ -177,6 +196,13 @@ class Player extends Sprite {
                 if (this.image !== this.sprites.attack1.image) {
                     this.image = this.sprites.attack1.image
                     this.frames = this.sprites.attack1.frames
+                    this.currFrame = 0
+                  } 
+            break
+            case 'attack1_left':
+                if (this.image !== this.sprites.attack1_left.image) {
+                    this.image = this.sprites.attack1_left.image
+                    this.frames = this.sprites.attack1_left.frames
                     this.currFrame = 0
                   } 
             break

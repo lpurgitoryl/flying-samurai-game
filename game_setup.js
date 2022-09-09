@@ -44,34 +44,38 @@ const shop = new Sprite({
 const player1 = new Player(
     { position: {x:100 , y:0}, velocity:{x:0 , y:0},
     imageOffSet: { x: 215,y: 157},
-    imageSrc: './assets/Idle.png',
+    imageSrc: './assets/player1/Idle.png',
     frames: 8,
     scale: 2.5
     , color: 'blue' // tempsd
     ,sprites: {
         idle: {
-            imageSrc: './assets/Idle.png',
+            imageSrc: './assets/player1/Idle.png',
             frames: 8,
 
         },
         run_left: {
-            imageSrc: './assets/Run-left.png',
+            imageSrc: './assets/player1/Run-left.png',
             frames: 8
         },
         run_right: {
-            imageSrc: './assets/Run.png',
+            imageSrc: './assets/player1/Run.png',
             frames: 8
         },
         jump: {
-            imageSrc: './assets/Jump.png',
+            imageSrc: './assets/player1/Jump.png',
             frames: 2
         },
         fall: {
-            imageSrc: './assets/Fall.png',
+            imageSrc: './assets/player1/Fall.png',
             frames: 2
         },
         attack1: {
-            imageSrc: './assets/Attack1.png',
+            imageSrc: './assets/player1/Attack1.png',
+            frames: 6
+        },
+        attack1_left: {
+            imageSrc: './assets/player1/Attack1_left.png',
             frames: 6
         }
     }
@@ -82,7 +86,7 @@ const player1 = new Player(
 const player2 = new Player(
     { position: {x:300 , y:0}, velocity:{x:0 , y:0},
       imageOffSet: { x: 215,y: 157},
-      imageSrc: './assets/Idle.png',
+      imageSrc: './assets/player1/Idle.png',
       frames: 8,
       scale: 2.5
       , color: 'green' // temp
