@@ -28,7 +28,7 @@ const action_keys = {
     ArrowUp: { pressed : false},
 
 };
-// other spites
+// other sprites
 const background = new Sprite({
     position: {x: 0, y:0},
     imageSrc: "./assets/background.png"
@@ -46,7 +46,7 @@ const shop = new Sprite({
 
 
 //
-// intial player spawn location
+// intial player spawns
 const player1 = new Player(
     { position: {x:100 , y:0}, velocity:{x:0 , y:0},
     imageOffSet: { x: 215,y: 157},
@@ -99,7 +99,7 @@ const player1 = new Player(
 );
 
 const player2 = new Player(
-    { position: {x:300 , y:0}, velocity:{x:0 , y:0},
+    { position: {x:900 , y:0}, velocity:{x:0 , y:0},
       imageOffSet: { x: 215,y: 171},
       imageSrc: './assets/player2/Idle.png',
       frames: 4,
@@ -151,7 +151,7 @@ const player2 = new Player(
 
 // Gamer Helper Functions
 // Match Timer 
-let timer = 60;
+let timer = 30;
 function decreaseTimer(){
     if (timer > 0){
         setTimeout(decreaseTimer, 1000);
@@ -178,12 +178,16 @@ function attackBoxCollision( Player1_attack, Player2_attack){
 function player1Movement(){
         // player 1 movement
         if(action_keys.a.pressed && player1.last_key === 'a'){
-            player1.velocity.x =-horizontal_vel;
+            // keep from going off screen
+            if(player1.position.x > 0)
+                player1.velocity.x =-horizontal_vel;
+            // console.log(player1.position.x + "and" + player1.position.y);
             player1.switchSprites('run_left');
             
     
         } else if (action_keys.d.pressed &&  player1.last_key === 'd'){
-            player1.velocity.x = horizontal_vel;
+            if(player1.position.x < 950)
+                player1.velocity.x = horizontal_vel;
             player1.switchSprites('run_right');
         } else {
             player1.switchSprites('idle');
@@ -200,10 +204,13 @@ function player1Movement(){
 function player2Movement(){
         // player 2 movement
         if(action_keys.ArrowLeft.pressed && player2.last_key == 'ArrowLeft'){
-            player2.velocity.x =-horizontal_vel;
+            if(player2.position.x  > 0)
+                player2.velocity.x =-horizontal_vel;
            player2.switchSprites('run_left');
-        }else if(action_keys.ArrowRight.pressed && player2.last_key == 'ArrowRight'){
-            player2.velocity.x =horizontal_vel;
+        }
+        else if(action_keys.ArrowRight.pressed && player2.last_key == 'ArrowRight'){
+            if(player2.position.x < 950)
+                player2.velocity.x =horizontal_vel;
             player2.switchSprites('run_right');
         }else {
             player2.switchSprites('idle');
@@ -220,10 +227,12 @@ function player2Movement(){
 function playerAttacksAndHealth(){
     // attack logging and health bar 
     if(player1.isAttacking && attackBoxCollision(player1, player2) && player1.currFrame>=3){
+        
         console.log("player 1 attack landed");
-        player2_healthbar -= 20;
-        player2_hitbar = 100 - player2_healthbar;
-
+        if(player2_healthbar >0){
+            player2_healthbar -= 15;
+            player2_hitbar = 100 - player2_healthbar;
+        }
         player2.switchSprites('hit');
 
         
@@ -231,13 +240,16 @@ function playerAttacksAndHealth(){
         document.getElementById("player2-bar").style.width = player2_healthbar + '%';
         document.getElementById("player2-hit").style.width = player2_hitbar + '%';
         document.getElementById("player2-points").innerHTML = player2_healthbar * 10;
-
+        
         player1.isAttacking = false;
+         
 
     } else if (player2.isAttacking && attackBoxCollision(player2, player1)  && player2.currFrame>=2){
         console.log("player 2 attack landed");
-        player1_healthbar -= 10;
-        player1_hitbar = 100 - player1_healthbar;
+        if(player1_healthbar > 0){
+            player1_healthbar -= 10;
+            player1_hitbar = 100 - player1_healthbar;
+        }
 
         player1.switchSprites('hit');
 

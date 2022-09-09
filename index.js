@@ -1,7 +1,6 @@
 
-// TODO: max double jump
-// TODO: keep from going past screen
-// TODO: random player names
+// ?: only give max double jump => Im actully gonna keep it in bc ima call the game Flying Samurai
+// ?: random player names => NAH its a short game no need for names
 // TODO: Controls Screen Before play start
 
 // Event Listeners for player keypresses aka movement
