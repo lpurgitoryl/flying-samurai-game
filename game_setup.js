@@ -153,12 +153,104 @@ const player2 = new Player(
 // Match Timer 
 let timer = 60;
 function decreaseTimer(){
-if (timer > 0){
-    setTimeout(decreaseTimer, 1000);
-    timer--;
-    document.getElementById("timer").innerText = timer;
+    if (timer > 0){
+        setTimeout(decreaseTimer, 1000);
+        timer--;
+        document.getElementById("timer").innerText = timer;
+    }
+
 }
 
+function attackBoxCollision( Player1_attack, Player2_attack){
+    var attacked = false;
+    if(
+        Player1_attack.attackBox.position.x + Player1_attack.attackBox.width >= Player2_attack.position.x 
+        && Player1_attack.attackBox.position.x <= Player2_attack.position.x + Player2_attack.width
+        && Player1_attack.attackBox.position.y + Player1_attack.attackBox.height >= Player2_attack.position.y 
+        && Player1_attack.attackBox.position.y <= Player2_attack.position.y + Player2_attack.height
+        ) {
+            attacked = true;
+        }
+        
+        return attacked;
+}
+
+function player1Movement(){
+        // player 1 movement
+        if(action_keys.a.pressed && player1.last_key === 'a'){
+            player1.velocity.x =-horizontal_vel;
+            player1.switchSprites('run_left');
+            
+    
+        } else if (action_keys.d.pressed &&  player1.last_key === 'd'){
+            player1.velocity.x = horizontal_vel;
+            player1.switchSprites('run_right');
+        } else {
+            player1.switchSprites('idle');
+        }
+    
+        // player 1 jumping
+        if(player1.velocity.y < 0){
+            player1.switchSprites('jump');
+        } else if (player1.velocity.y > 0){
+            player1.switchSprites('fall');
+        }
+}
+
+function player2Movement(){
+        // player 2 movement
+        if(action_keys.ArrowLeft.pressed && player2.last_key == 'ArrowLeft'){
+            player2.velocity.x =-horizontal_vel;
+           player2.switchSprites('run_left');
+        }else if(action_keys.ArrowRight.pressed && player2.last_key == 'ArrowRight'){
+            player2.velocity.x =horizontal_vel;
+            player2.switchSprites('run_right');
+        }else {
+            player2.switchSprites('idle');
+        }
+    
+        // player 2 jumping
+        if(player2.velocity.y < 0){
+            player2.switchSprites('jump');
+        } else if (player2.velocity.y > 0){
+            player2.switchSprites('fall');
+        }
+}
+
+function playerAttacksAndHealth(){
+    // attack logging and health bar 
+    if(player1.isAttacking && attackBoxCollision(player1, player2) && player1.currFrame>=3){
+        console.log("player 1 attack landed");
+        player2_healthbar -= 20;
+        player2_hitbar = 100 - player2_healthbar;
+
+        player2.switchSprites('hit');
+
+        
+
+        document.getElementById("player2-bar").style.width = player2_healthbar + '%';
+        document.getElementById("player2-hit").style.width = player2_hitbar + '%';
+        document.getElementById("player2-points").innerHTML = player2_healthbar * 10;
+
+        player1.isAttacking = false;
+
+    } else if (player2.isAttacking && attackBoxCollision(player2, player1)  && player2.currFrame>=2){
+        console.log("player 2 attack landed");
+        player1_healthbar -= 10;
+        player1_hitbar = 100 - player1_healthbar;
+
+        player1.switchSprites('hit');
+
+        document.getElementById("player1-bar").style.width = player1_healthbar + '%';
+        document.getElementById("player1-hit").style.width = player1_hitbar + '%';
+        document.getElementById("player1-points").innerHTML = player1_healthbar * 10;
+
+        player2.isAttacking = false;
+    } else if ( player1.isAttacking && !attackBoxCollision(player1, player2) && player1.currFrame>=3){
+        player1.isAttacking = false;
+    } else if (player2.isAttacking && !attackBoxCollision(player2, player1) && player2.currFrame>=2){
+        player2.isAttacking = false;
+    }
 }
 
 function gameOver(){
@@ -180,3 +272,17 @@ function gameOver(){
         document.getElementById("match-info").innerHTML = 'TIME RAN OUT';
     }
 }
+
+// slider functionality used for testing health bars
+// var slider = document.getElementById("myRange");
+// var output = document.getElementById("demo");
+// output.innerHTML = slider.value;
+
+// slider.oninput = function() {
+//   output.innerHTML = this.value;
+//   document.getElementById("player1-bar").style.width = slider.value + '%';
+//   document.getElementById("player1-hit").style.width = (100 - slider.value) + '%';
+
+// //   document.getElementById("player2-bar").style.width = slider.value + '%';
+// //   document.getElementById("player2-hit").style.width = (100-slider.value) + '%';
+// }
