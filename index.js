@@ -1,60 +1,9 @@
-//  JS refresher semi colons only go after statements not fucntions
-// consts
-const canvas = document.querySelector("canvas");
-const c = canvas.getContext('2d');
-const gravity = 0.2;
-const horizontal_vel = 7;
-const vertical_vel = 3;
 
+// ?: only give max double jump => Im actully gonna keep it in bc ima call the game Flying Samurai
+// ?: random player names => NAH its a short game no need for names
+// TODO: Controls Screen Before play start
 
-const action_keys = {
-    a: { pressed: false},
-    d: { pressed: false},
-    w: { pressed : false},
-    ArrowRight: { pressed : false},
-    ArrowLeft: { pressed : false},
-    ArrowUp: { pressed : false}
-};
-canvas.width = 1024;
-canvas.height = 576;
-
-c.fillRect(0,0, canvas.width, canvas.height);
-
-class Sprite{
-    constructor({position, velocity}){
-        this.position = position;
-        this.velocity = velocity;
-        this.height = 150;
-
-        this.last_key;// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let
-    }
-
-    draw(){ // draw out sprite
-        c.fillStyle = 'red';
-        c.fillRect(this.position.x, this.position.y, 50, this.height);
-    }
-
-    update(){
-        this.draw();
-        this.position.x += this.velocity.x;
-        this.position.y += this.velocity.y;
-
-        if(this.position.y + this.height + this.velocity.y >= canvas.height){
-            this.velocity.y =0;
-        }   else {
-            this.velocity.y += gravity;
-        }
-    }
-}
-
-const player1 = new Sprite(
-    {position: {x:0 , y:0}, velocity:{x:0 , y:0}} 
-);
-
-const player2 = new Sprite(
-    { position: {x:100 , y:0}, velocity:{x:0 , y:0}}
-);
-
+// Event Listeners for player keypresses aka movement
 
 // arrow function basis for function statement (action) vs function expession (produces value) 
 // https://www.freecodecamp.org/news/when-and-why-you-should-use-es6-arrow-functions-and-when-you-shouldnt-3d851d7f0b26/
@@ -62,35 +11,44 @@ const player2 = new Sprite(
 // When passing parameter values, use an "anonymous function" that calls the specified function with the parameters:
 // element.addEventListener("click", function(){ myFunction(p1, p2); });
 window.addEventListener('keydown', (event) => {
-    switch(event.key){
-        case 'd':
-           action_keys.d.pressed = true;
-           player1.last_key ='d';
-        break;
-        case 'a':
-            action_keys.a.pressed = true;
-            player1.last_key = 'a';
-        break;
-        case 'w': 
-           // action_keys.w.pressed = true;
-            //player1_last_key = 'w';
-            player1.velocity.y = -vertical_vel; // negative to go up
-        break;
-
-        //
-        case 'ArrowRight':
-            action_keys.ArrowRight.pressed = true;
-            player2.last_key = 'ArrowRight';
-        break;
-        case 'ArrowLeft':
-            action_keys.ArrowLeft.pressed = true;
-            player2.last_key = 'ArrowLeft';
-        break;
-        case 'ArrowUp':
-            player2.velocity.y = -vertical_vel;
-        break;
+    if(!player1.isDead){
+        switch(event.key){
+            case 'd':
+            action_keys.d.pressed = true;
+            player1.last_key ='d';
+            break;
+            case 'a':
+                action_keys.a.pressed = true;
+                player1.last_key = 'a';
+            break;
+            case 'w': 
+                player1.velocity.y = -vertical_vel; // negative to go up
+            break;
+            case ' ':
+                player1.attack();
+            break;
+        }
+    }
+    
+    if(!player2.isDead){
+        switch(event.key){
+            case 'ArrowRight':
+                action_keys.ArrowRight.pressed = true;
+                player2.last_key = 'ArrowRight';
+            break;
+            case 'ArrowLeft':
+                action_keys.ArrowLeft.pressed = true;
+                player2.last_key = 'ArrowLeft';
+            break;
+            case 'ArrowUp':
+                player2.velocity.y = -vertical_vel;
+            break;
+            case 'ArrowDown':
+                player2.attack();
+            break;
 
             
+        }
     }
     console.log(event.key);
 });
@@ -114,31 +72,43 @@ window.addEventListener('keyup', (event) => {
 
     }
 });
+// End Event Listeners
 
-// intial sprite set up ^^
+// Recursive Animation Function
+
 function animate(){
     c.fillStyle= 'black'
     window.requestAnimationFrame(animate);
     c.fillRect(0,0, canvas.width, canvas.height);
+    background.update();
+    shop.update();
+
+
     player1.update();
     player2.update();
 
     player1.velocity.x = 0;
     player2.velocity.x = 0;
 
-    // player 1 movement
-    if(action_keys.a.pressed && player1.last_key == 'a'){
-        player1.velocity.x =-horizontal_vel;
-    } else if (action_keys.d.pressed &&  player1.last_key == 'd'){
-        player1.velocity.x = horizontal_vel;
-    }
-    //
-    if(action_keys.ArrowLeft.pressed && player2.last_key == 'ArrowLeft'){
-        player2.velocity.x =-horizontal_vel;
-    }else if(action_keys.ArrowRight.pressed && player2.last_key == 'ArrowRight'){
-        player2.velocity.x =horizontal_vel;
-    }
+
+
+    player1Movement();
+    player2Movement();
+
+    playerAttacksAndHealth();
+
+    gameOver();
 
 }
 
+// game procedure
 animate();
+decreaseTimer();
+// functions
+
+
+
+
+
+
+
