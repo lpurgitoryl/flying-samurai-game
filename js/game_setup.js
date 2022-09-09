@@ -229,8 +229,8 @@ function playerAttacksAndHealth(){
     if(player1.isAttacking && attackBoxCollision(player1, player2) && player1.currFrame>=3){
         
         console.log("player 1 attack landed");
-        if(player2_healthbar >0){
-            player2_healthbar -= 15;
+        if(player2_healthbar >= 10){
+            player2_healthbar -= 10;
             player2_hitbar = 100 - player2_healthbar;
         }
         player2.switchSprites('hit');
@@ -246,8 +246,8 @@ function playerAttacksAndHealth(){
 
     } else if (player2.isAttacking && attackBoxCollision(player2, player1)  && player2.currFrame>=2){
         console.log("player 2 attack landed");
-        if(player1_healthbar > 0){
-            player1_healthbar -= 10;
+        if(player1_healthbar >= 5){
+            player1_healthbar -= 5;
             player1_hitbar = 100 - player1_healthbar;
         }
 
@@ -271,16 +271,16 @@ function gameOver(){
         player1.switchSprites('death');
         player2.switchSprites('death');
         
-        document.getElementById("match-info").innerHTML = '!!!!!!!!!!!!!! T I E !!!!!!!!!!!!!!!';
+        document.getElementById("match-info").innerHTML = '!!!!! T I E !!!!';
     } else if (player1_healthbar <= 0){
         player1.switchSprites('death');
 
-        document.getElementById("match-info").innerHTML = '!!!!!!!!!!!!!! PLAYER 2 WINS !!!!!!!!!!!!!!!';
+        document.getElementById("match-info").innerHTML = '!!!! PLAYER 2 WINS !!!!';
     } else if (player2_healthbar <= 0){
         player2.switchSprites('death');
-        document.getElementById("match-info").innerHTML = '!!!!!!!!!!!!!! PLAYER 1 WINS !!!!!!!!!!!!!!!';
+        document.getElementById("match-info").innerHTML = '!!!! PLAYER 1 WINS !!!!';
     }
-    if (timer === 0){
+    if (timer === 0 && !player1.isDead && !player2.isDead){
         document.getElementById("match-info").innerHTML = 'TIME RAN OUT';
     }
 }

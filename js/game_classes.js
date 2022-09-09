@@ -89,18 +89,15 @@ class Player extends Sprite {
         this.attackBox.position.x = this.position.x + 100 ;
         this.attackBox.position.y =  this.position.y + (50); // additon  moves down
 
-    //    if(this.isAttacking){
-
             if(this.last_key === 'a'  || this.last_key === 'ArrowLeft'  ){
                 this.attackBox.position.x =  this.position.x - this.attackBox.width + this.width - 100; // subtraction moves left
                 console.log("FLIPPING");
                 this.isFacingLeft = true;
             } 
 
-            c.fillStyle = this.color;
-            c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
-       // }
-        //
+            // c.fillStyle = this.color;
+            // c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
+            
         super.draw()
         if(!this.isDead) 
             super.update();
