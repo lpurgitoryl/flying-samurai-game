@@ -85,12 +85,43 @@ const player1 = new Player(
 
 const player2 = new Player(
     { position: {x:300 , y:0}, velocity:{x:0 , y:0},
-      imageOffSet: { x: 215,y: 157},
-      imageSrc: './assets/player1/Idle.png',
-      frames: 8,
+      imageOffSet: { x: 215,y: 171},
+      imageSrc: './assets/player2/Idle.png',
+      frames: 4,
       scale: 2.5
       , color: 'green' // temp
+      ,sprites: {
+        idle: {
+            imageSrc: './assets/player2/Idle.png',
+            frames: 4,
+
+        },
+        run_left: {
+            imageSrc: './assets/player2/Run-left.png',
+            frames: 8
+        },
+        run_right: {
+            imageSrc: './assets/player2/Run.png',
+            frames: 8
+        },
+        jump: {
+            imageSrc: './assets/player2/Jump.png',
+            frames: 2
+        },
+        fall: {
+            imageSrc: './assets/player2/Fall.png',
+            frames: 2
+        },
+        attack1: {
+            imageSrc: './assets/player2/Attack1.png',
+            frames: 4
+        },
+        attack1_left: {
+            imageSrc: './assets/player2/Attack1_left.png',
+            frames: 4
+        }
       
+    }
     }
 );
 // End Game Setup
