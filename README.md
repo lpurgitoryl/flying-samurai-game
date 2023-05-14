@@ -4,6 +4,8 @@ A two player acrade style game.
 Fight... TILL THE DEATH or until time runs out.
 Made using vanilla HTML/CSS/Javascript.
 
+PLAY IT HERE: https://flying-samurai-game.vercel.app/
+
 ## Background
 
 My intro to HTML5 games!
